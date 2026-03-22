@@ -20,17 +20,12 @@ System.out.println("Encryption keys are: " + e + ", " + n);
 System.out.println("Decryption keys are: " + d + ", " + n);
 }
 public static BigInteger generateE(BigInteger fiofn) {
-int y, intGCD;
-BigInteger e;
-BigInteger gcd;
-Random x = new Random();
-do {y = x.nextInt(fiofn.intValue()-1);
-String z = Integer.toString(y);
-e = new BigInteger(z);
-gcd = fiofn.gcd(e);
-intGCD = gcd.intValue();
-}
-while(y <= 2 || intGCD != 1);
-return e;
-}
+        BigInteger e;
+        do {
+            e = new BigInteger(fiofn.bitLength(), new Random());
+        } while (e.compareTo(BigInteger.TWO) <= 0 || 
+                 e.compareTo(fiofn) >= 0 || 
+                 !fiofn.gcd(e).equals(BigInteger.ONE));
+        return e;
+    }
 }
